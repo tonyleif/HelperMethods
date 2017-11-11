@@ -7,7 +7,8 @@
 
 <h2>CreatePerson</h2>
 
-<form action="/Home/CreatePerson" method="post">
+@using (Html.BeginForm("CreatePerson", "Home", new { id = "MyIdValue" }, FormMethod.Post, new { @class = "personClass", data_formType = "person" }))
+{
     <div class="dataElem">
         <label>PersonId</label>
         <input name="personId" value="@Model.PersonId" />
@@ -21,4 +22,4 @@
         <input name="LastName" value="@Model.LastName" />
     </div>
     <input type="submit" value="Submit" />
-</form>
+}
