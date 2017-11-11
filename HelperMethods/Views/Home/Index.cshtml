@@ -6,14 +6,14 @@
 }
 
 @*@helper ListArrayItems(string[] items)
-{
-    <ul>
-        @foreach (string str in items)
-        {
-            <li>@str</li>
-        }
-    </ul>
-}*@
+    {
+        <ul>
+            @foreach (string str in items)
+            {
+                <li>@str</li>
+            }
+        </ul>
+    }*@
 
 <!DOCTYPE html>
 <html>
@@ -22,15 +22,24 @@
     <title>Index</title>
 </head>
 <body>
-    <div>
-        Here are the fruits: @Html.ListArrayItems((string[])ViewBag.Fruits)
-    </div>
-    <div>
-        Here are the cities: @Html.ListArrayItems((string[])ViewBag.Cities)
-    </div>
-    <div>
+    <p>This is the content from the view:</p>
+    <div style="border: thin solid black; padding: 10px">
         Here is the message:
-        @Model
+        <p>@Model</p>
     </div>
+    <p>This is the content from the helper method:</p>
+    <div style="border: thin solid black; padding: 10px">
+        @Html.DisplayMessage(Model)
+    </div>
+    @*<div>
+            Here are the fruits: @Html.ListArrayItems((string[])ViewBag.Fruits)
+        </div>
+        <div>
+            Here are the cities: @Html.ListArrayItems((string[])ViewBag.Cities)
+        </div>
+        <div>
+            Here is the message:
+            @Model
+        </div>*@
 </body>
 </html>
