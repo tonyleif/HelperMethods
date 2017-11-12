@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Web.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace HelperMethods.Models
 {
-    public class Person
+    [MetadataType(typeof(PersonMetaData))]
+    public partial class Person
     {
-        [HiddenInput]
         public int PersonId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
