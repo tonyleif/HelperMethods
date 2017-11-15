@@ -26,7 +26,7 @@ namespace HelperMethods.Controllers
             IEnumerable<Person> data = personData;
             if(selectedRole != "All")
             {
-                Role selected = (Role)Enum.Parse(typeof(Role)), selectedRole);
+                Role selected = (Role)Enum.Parse(typeof(Role), selectedRole);
                 data = personData.Where(p => p.Role == selected);
             }
             return data;
