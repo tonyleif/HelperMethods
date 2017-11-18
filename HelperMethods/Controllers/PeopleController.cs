@@ -24,7 +24,7 @@ namespace HelperMethods.Controllers
         private IEnumerable<Person> GetData(string selectedRole)
         {
             IEnumerable<Person> data = personData;
-            if(selectedRole != "All")
+            if (selectedRole != "All")
             {
                 Role selected = (Role)Enum.Parse(typeof(Role), selectedRole);
                 data = personData.Where(p => p.Role == selected);
@@ -32,22 +32,46 @@ namespace HelperMethods.Controllers
             return data;
         }
 
-        public JsonResult GetPeopleDataJson(string selectedRole = "All")
+        public ActionResult GetPeopleData(string selectedRole = "All")
         {
-            //IEnumerable<Person> data = GetData(selectedRole);
-            var data = GetData(selectedRole).Select(p => new
+            IEnumerable<Person> data = personData;
+            if (selectedRole != "All")
             {
-                FirstName = p.FirstName,
-                LastName = p.LastName,
-                Role = Enum.GetName(typeof(Role), p.Role)
-            });
-            return Json(data, JsonRequestBehavior.AllowGet);
+                Role selected = (Role)Enum.Parse(typeof(Role), selectedRole);
+                data = personData.Where(p => p.Role = selected);
+            }
+            if (Request.IsAjaxRequest())
+            {
+                var formattedData = data.Select(p => new
+                {
+                    FirstName = p.FirstName,
+                    LastName = p.LastName,
+                    Role = Enum.GetName(typeof(Role), p.Role)
+                });
+                return Json(formattedData, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return PartialView(data);
+            }
         }
 
-        public PartialViewResult GetPeopleData(string selectedRole = "All")
-        {
-            return PartialView(GetData(selectedRole));
-        }
+        //public JsonResult GetPeopleDataJson(string selectedRole = "All")
+        //{
+        //    //IEnumerable<Person> data = GetData(selectedRole);
+        //    var data = GetData(selectedRole).Select(p => new
+        //    {
+        //        FirstName = p.FirstName,
+        //        LastName = p.LastName,
+        //        Role = Enum.GetName(typeof(Role), p.Role)
+        //    });
+        //    return Json(data, JsonRequestBehavior.AllowGet);
+        //}
+
+        //public PartialViewResult GetPeopleData(string selectedRole = "All")
+        //{
+        //    return PartialView(GetData(selectedRole));
+        //}
 
         //public PartialViewResult GetPeopleData(string selectedRole = "All")
         //{

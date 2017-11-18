@@ -6,11 +6,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     AjaxOptions ajaxOpts = new AjaxOptions
     {
-        UpdateTargetId = "tableBody",
+        //UpdateTargetId = "tableBody",
         Url = Url.Action("GetPeopleData"),
         LoadingElementId = "loading",
         LoadingElementDuration = 1000,
-        Confirm = "Do you wish to request new data?"
+        //Confirm = "Do you wish to request new data?"
+        OnSuccess = "processData"
     };
 }
 
@@ -51,7 +52,7 @@
     {
         <div class="ajaxLink">
             @Ajax.ActionLink(role, "GetPeople", new { selectedRole = role },
-                new AjaxOptions { Url = Url.Action("GetPeopleDataJson", new { selectedRole = role }),
+                new AjaxOptions { Url = Url.Action("GetPeopleData", new { selectedRole = role }),
                 OnSuccess = "processData"})
         </div>
     }
